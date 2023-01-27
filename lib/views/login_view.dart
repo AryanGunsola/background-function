@@ -23,7 +23,7 @@ class _LoginViewState extends State<LoginView> {
         elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        toolbarHeight: 40,
+        toolbarHeight: 20,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
@@ -40,7 +40,7 @@ class _LoginViewState extends State<LoginView> {
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                     height: 2,
-                    color: Color(0xFF0D253C),
+                    color: Color(0xFF3e445c),
                   ),
                 ),
                 const Text(
@@ -48,7 +48,7 @@ class _LoginViewState extends State<LoginView> {
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF0D253C),
+                    color: Color(0xFF3e445c),
                   ),
                 ),
                 const SizedBox(
@@ -59,7 +59,7 @@ class _LoginViewState extends State<LoginView> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xFF646464),
+                    color: Color(0xFF535a75),
                   ),
                 ),
                 const SizedBox(
@@ -76,7 +76,7 @@ class _LoginViewState extends State<LoginView> {
       bottomSheet: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: PrimaryButton(
-            title: 'Get OTP',
+            title: 'Login',
             onTap: () {
               if (_formKey.currentState!.validate()) {
                 databaseRef

@@ -32,7 +32,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
         height: 50,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: widget.bgColor ?? const Color(0xFF4d79ff),
+          color: widget.bgColor ?? const Color(0xFF5c80f8),
           borderRadius: BorderRadius.circular(10),
         ),
         child: widget.isLoading

@@ -1,3 +1,4 @@
+import 'package:background_app/views/payment_view.dart';
 import 'package:background_app/widgets/primary_button.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +77,7 @@ class _HomeViewState extends State<HomeView> {
             fontWeight: FontWeight.w400,
           ),
         ),
+        automaticallyImplyLeading: false,
         centerTitle: true,
       ),
       body: Padding(
@@ -105,11 +107,11 @@ class _HomeViewState extends State<HomeView> {
               bgColor: Colors.green,
               title: 'Pay Now',
               onTap: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: ((context) => const PaymentView()),
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: ((context) => const PaymentView()),
+                  ),
+                );
               },
             )
           ],

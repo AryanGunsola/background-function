@@ -16,10 +16,11 @@ class MobileTextField extends StatelessWidget {
         keyboardType: TextInputType.phone,
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Please enter your mobile number';
+            return 'please enter a valid 10-digit number';
           }
           return null;
         },
+
         style: const TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w400,
@@ -32,17 +33,17 @@ class MobileTextField extends StatelessWidget {
             hintStyle: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w400,
-              color: Colors.black54,
+              color: Color(0xFFa3a9c0),
             ),
             // fillColor: const Color(0xFFF5F5F5),
             // filled: true,
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.grey),
+              borderSide: const BorderSide(color: Color(0XFFe1e3eb)),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.grey),
+              borderSide: const BorderSide(color: Color(0XFFe1e3eb)),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
@@ -57,19 +58,26 @@ class MobileTextField extends StatelessWidget {
               vertical: 0,
             ),
             prefixIcon: Container(
-              width: 60,
-              height: 60,
+              width: 50,
+              // height: 50,
               margin: const EdgeInsets.only(right: 10),
               decoration: BoxDecoration(
-                  color: const Color(0xFF4d79ff).withOpacity(0.20),
-                  // color: Colors.grey.withOpacity(0.30),
-                  borderRadius: BorderRadius.circular(10)),
+                color: const Color(0xFFe0e3ec),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                ),
+                border: Border.all(
+                  color: const Color(0XFFe1e3eb),
+                ),
+              ),
               child: const Center(
                 child: Text(
                   '+91',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
+                    color: Color(0xFF525b78),
                   ),
                 ),
               ),

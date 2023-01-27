@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class TextFieldWithPrefixIconWidget extends StatelessWidget {
+class PrefixIconTextFieldWidget extends StatelessWidget {
   final String hintText;
   final String prefixIcon;
   final double? width;
@@ -16,7 +17,7 @@ class TextFieldWithPrefixIconWidget extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType? keyboardType;
   final FormFieldValidator<String> validator;
-  const TextFieldWithPrefixIconWidget({
+  const PrefixIconTextFieldWidget({
     Key? key,
     required this.hintText,
     required this.prefixIcon,
@@ -83,11 +84,12 @@ class TextFieldWithPrefixIconWidget extends StatelessWidget {
           ),
           prefixIcon: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Image.asset(
+            child: SvgPicture.asset(
               prefixIcon,
-              width: 30,
-              height: 30,
-              // fit: BoxFit.scaleDown,
+              // width: 30,
+              // height: 30,
+              color: const Color(0xFF5c80f8),
+              fit: BoxFit.scaleDown,
             ),
           ),
           suffixIcon: showSuffixIcon
@@ -99,7 +101,7 @@ class TextFieldWithPrefixIconWidget extends StatelessWidget {
                       suffixOnPressed!();
                     }
                   },
-                  child: Image.asset(
+                  child: SvgPicture.asset(
                     suffixIcon ?? '',
                     fit: BoxFit.scaleDown,
                   ),

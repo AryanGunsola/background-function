@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:background_app/views/login_view.dart';
+import 'package:background_app/views/delivery_view.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -21,7 +21,7 @@ class _SplashViewState extends State<SplashView> {
       if (!mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: ((context) => const LoginView()),
+          builder: ((context) => const DeliveryView()),
         ),
       );
       disopeTimer();
@@ -58,8 +58,8 @@ class _SplashViewState extends State<SplashView> {
         Center(
             child: Image.asset(
           'assets/images/app-icon.png',
-          width: 100,
-          height: 100,
+          width: 70,
+          height: 70,
         )),
       ],
     ));

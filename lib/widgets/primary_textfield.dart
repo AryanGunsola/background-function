@@ -41,25 +41,25 @@ class PrimaryTextField extends StatelessWidget {
           hintStyle: const TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w400,
-            color: Colors.black54,
+            color: Color(0xFFa3a9c0),
           ),
-          fillColor: const Color(0xFFF5F5F5),
-          filled: true,
+          // fillColor: const Color(0xFFF5F5F5),
+          // filled: true,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Colors.transparent),
+            borderSide: const BorderSide(color: Color(0XFFe1e3eb), width: 1.2),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Colors.transparent),
+            borderSide: const BorderSide(color: Color(0XFFe1e3eb), width: 1.2),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Colors.transparent),
+            borderSide: const BorderSide(color: Color(0XFFe1e3eb), width: 1.2),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Colors.transparent),
+            borderSide: const BorderSide(color: Color(0XFFe1e3eb), width: 1.2),
           ),
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 25,

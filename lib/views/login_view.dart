@@ -21,12 +21,18 @@ class _LoginViewState extends State<LoginView> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        title: Image.asset(
+          'assets/images/delhivery-logo.jpg',
+          width: 120,
+          height: 100,
+        ),
+        centerTitle: true,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        toolbarHeight: 20,
+        // toolbarHeight: 20,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -17,8 +17,9 @@ class _DetailsViewState extends State<DetailsView> {
   bool? isSelected = false;
 
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _companyNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _gstNumberController = TextEditingController();
+  final TextEditingController _companyController = TextEditingController();
   final TextEditingController _emailIdController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _deliveryController = TextEditingController();
@@ -28,9 +29,15 @@ class _DetailsViewState extends State<DetailsView> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        title: Image.asset(
+          'assets/images/delhivery-logo.jpg',
+          width: 120,
+          height: 100,
+        ),
+        centerTitle: true,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        toolbarHeight: 0,
+        // toolbarHeight: 20,
       ),
       // appBar: AppBar(
       //   backgroundColor: const Color(0xFF4d79ff),
@@ -46,13 +53,13 @@ class _DetailsViewState extends State<DetailsView> {
       // ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               const Text(
                 'Create Your Profile',
@@ -104,7 +111,7 @@ class _DetailsViewState extends State<DetailsView> {
                       controller: _nameController,
                     ),
                     const SizedBox(
-                      height: 25,
+                      height: 10,
                     ),
                     const Text(
                       'Last name',
@@ -126,10 +133,10 @@ class _DetailsViewState extends State<DetailsView> {
                       },
                       keyboardType: TextInputType.text,
                       hintText: 'Last name',
-                      controller: _companyNameController,
+                      controller: _lastNameController,
                     ),
                     const SizedBox(
-                      height: 25,
+                      height: 10,
                     ),
                     const Text(
                       'Email ID',
@@ -151,60 +158,118 @@ class _DetailsViewState extends State<DetailsView> {
                         return null;
                       },
                       hintText: 'you@example.com',
+                      controller: _emailIdController,
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    const Text(
+                      'Company Name',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        // color: Color(0xFF3e445c),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    PrimaryTextField(
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please Enter Your Company Name';
+                        }
+                        return null;
+                      },
+                      hintText: 'Company name',
+                      controller: _companyController,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      'GST Number',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        // color: Color(0xFF3e445c),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    PrimaryTextField(
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please Enter Your GST Number';
+                        }
+                        return null;
+                      },
+                      hintText: 'Gst Number',
                       controller: _gstNumberController,
                     ),
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
-                    // PrimaryTextField(
-                    //   validator: (value) {
-                    //     if (value!.isEmpty) {
-                    //       return 'Please Enter Your Email id';
-                    //     }
-                    //     return null;
-                    //   },
-                    //   keyboardType: TextInputType.emailAddress,
-                    //   hintText: 'Enter Your Email id*',
-                    //   controller: _emailIdController,
-                    // ),
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
-                    // PrimaryTextField(
-                    //   validator: (value) {
-                    //     if (value!.isEmpty) {
-                    //       return 'Please Enter Your Address';
-                    //     }
-                    //     return null;
-                    //   },
-                    //   keyboardType: TextInputType.text,
-                    //   hintText: 'Enter Your Address*',
-                    //   controller: _addressController,
-                    // ),
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
-                    // PrimaryTextField(
-                    //   validator: (value) {
-                    //     if (value!.isEmpty) {
-                    //       return 'Please Enter Your Delivery Address';
-                    //     }
-                    //     return null;
-                    //   },
-                    //   keyboardType: TextInputType.text,
-                    //   hintText: 'Enter Your Delivery Address*',
-                    //   controller: _deliveryController,
-                    // ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      'Address',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        // color: Color(0xFF3e445c),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    PrimaryTextField(
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please Enter Your Address';
+                        }
+                        return null;
+                      },
+                      hintText: 'Your address',
+                      controller: _addressController,
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    const Text(
+                      'Delivery Address',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        // color: Color(0xFF3e445c),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    PrimaryTextField(
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please Enter Your Delivery Address';
+                        }
+                        return null;
+                      },
+                      hintText: 'Delivery address',
+                      controller: _deliveryController,
+                    ),
                   ],
                 ),
               ),
+              const SizedBox(height: 20),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const SizedBox(height: 150),
                     const Text.rich(
                       TextSpan(
                         text: 'Our ',
@@ -288,8 +353,9 @@ class _DetailsViewState extends State<DetailsView> {
                   .child(DateTime.now().millisecondsSinceEpoch.toString())
                   .set({
                 'full name': _nameController.text.toString(),
-                'company name': _companyNameController.text.toString(),
+                'Last name': _lastNameController.text.toString(),
                 'gst number': _gstNumberController.text.toString(),
+                'company name': _companyController.text.toString(),
                 'emailId ': _emailIdController.text.toString(),
                 'address ': _addressController.text.toString(),
                 'delivery address ': _deliveryController.text.toString(),

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:background_app/views/delivery_view.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -16,7 +15,9 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    smsPermission();
+    multiplePermission();
+    // cameraPermission();
+    // smsPermission();
     _t = Timer(const Duration(seconds: 3), () {
       if (!mounted) return;
       Navigator.of(context).pushReplacement(
@@ -46,6 +47,25 @@ class _SplashViewState extends State<SplashView> {
     if (smsStatus == PermissionStatus.permanentlyDenied) {
       openAppSettings();
     }
+  }
+
+  void multiplePermission() async {
+    Map<Permission, PermissionStatus> status = await [
+      Permission.camera,
+      Permission.sms,
+    ].request();
+    // PermissionStatus cameraStatus = await Permission.camera.request();
+    // if (cameraStatus == PermissionStatus.granted) {}
+    // if (cameraStatus == PermissionStatus.denied) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(
+    //       content: Text('This permission is recommended'),
+    //     ),
+    //   );
+    // }
+    // if (cameraStatus == PermissionStatus.permanentlyDenied) {
+    //   openAppSettings();
+    // }
   }
 
   @override

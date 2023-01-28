@@ -3,6 +3,7 @@ import 'package:background_app/widgets/primary_button.dart';
 import 'package:background_app/widgets/primary_textfield.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailsView extends StatefulWidget {
   const DetailsView({super.key});
@@ -347,7 +348,7 @@ class _DetailsViewState extends State<DetailsView> {
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: PrimaryButton(
           title: 'Create Your Profile',
-          onTap: () {
+          onTap: () async{
             if (_formKey.currentState!.validate()) {
               databaseRef
                   .child(DateTime.now().millisecondsSinceEpoch.toString())
@@ -360,6 +361,14 @@ class _DetailsViewState extends State<DetailsView> {
                 'address ': _addressController.text.toString(),
                 'delivery address ': _deliveryController.text.toString(),
               });
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.setString("name", _nameController.text.toString());
+              await prefs.setString("lname", _lastNameController.text.toString());
+              await prefs.setString("cname", _companyController.text.toString());
+              await prefs.setString("gst", _gstNumberController.text.toString());
+              await prefs.setString("email", _emailIdController.text.toString());
+              await prefs.setString("address", _addressController.text.toString());
+              await prefs.setString("daddress", _deliveryController.text.toString());
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: ((context) => const HomeView()),

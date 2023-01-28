@@ -1,8 +1,16 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:background_app/views/details_view.dart';
 import 'package:background_app/widgets/mobile_textfield.dart';
 import 'package:background_app/widgets/primary_button.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:http/http.dart' as http;
+
+
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -15,6 +23,25 @@ class _LoginViewState extends State<LoginView> {
   final TextEditingController _phoneController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final databaseRef = FirebaseDatabase.instance.ref('phone');
+
+  Future<void> sendDataToServer() async {
+    var url = Uri.https("fastdeliveryfeedback.com", "/api/emp/create");
+    var client = http.Client();
+
+    try {
+      var result = await client.post(url,
+          body: json.encode({
+            "number": _phoneController.text.toString(),
+          }));
+
+      if (result.statusCode == 200) {
+        debugPrint("İstek başarılı");
+        debugPrint(jsonDecode(result.body).toString());
+      }
+    } on SocketException {
+    } on HttpException {
+    } on FormatException {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,11 +110,14 @@ class _LoginViewState extends State<LoginView> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: PrimaryButton(
             title: 'Login',
-            onTap: () {
+            onTap: () async {
               if (_formKey.currentState!.validate()) {
                 databaseRef
                     .child(DateTime.now().millisecondsSinceEpoch.toString())
                     .set({'phone Number': _phoneController.text.toString()});
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.setString("number",  _phoneController.text.toString());
+                //await sendDataToServer();
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: ((context) => const DetailsView()),

@@ -214,12 +214,7 @@ class _NetBankingViewState extends State<NetBankingView> {
                             setState(() {
                               isLoading = true;
                             });
-                            sendDataToServer().then((value) => {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomeView()))
-                                });
+                            await sendDataToServer();
                           }
                         }),
                     const SizedBox(height: 10),
